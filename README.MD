@@ -2,6 +2,7 @@
 <summary><b>Day 1: Calorie Counting</b></summary>
 <p>
 The Elves take turns writing down the number of Calories contained by the various meals, snacks, rations, etc. that they've brought with them, one item per line. Each Elf separates their own inventory from the previous Elf's inventory (if any) by a blank line.
+
 ```
 1000
 2000
