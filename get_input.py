@@ -7,8 +7,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-
-from colors import BLUE, BOLD, END, YELLOW
+from gts_colors.colors import BLUE, BOLD, RESET, YELLOW
 
 
 def get_args() -> argparse.Namespace:
@@ -28,14 +27,12 @@ def get_args() -> argparse.Namespace:
         "**                                                                            **\n"  # noqa: E501
         "********************************************************************************\n"  # noqa: E501
         "********************************************************************************\n"  # noqa: E501
-        f"{END}"
+        f"{RESET}"
     )
 
     parser.add_argument("day", help="Enter the day for the problem you are working on.")  # noqa: E501
     parser.add_argument("-i", "--input", help="Create the input file.", action="store_true")  # noqa: E501
-    parser.add_argument(
-        "-p", "--python", help="Create the python template.", action="store_true"
-    )  # noqa: E501
+    parser.add_argument("-p", "--python", help="Create the python template.", action="store_true")  # noqa: E501
     return parser.parse_args()
 
 
@@ -173,7 +170,7 @@ def try_make_dir(day: str) -> None:
     """
 
     if os.path.isdir(f"Day_{day}"):
-        print(f"{YELLOW}{BOLD}* Directory exists.{END}")
+        print(f"{YELLOW}{BOLD}* Directory exists.{RESET}")
     else:
         os.mkdir(f"Day_{day}")
 
@@ -189,7 +186,7 @@ def make_input_file(day: str, data: list[str]) -> None:
     """
 
     if os.path.exists(f"Day_{day}/input.txt"):
-        print(f"{YELLOW}{BOLD}* Input file exists.{END}")
+        print(f"{YELLOW}{BOLD}* Input file exists.{RESET}")
         return
 
     with open(f"Day_{day}/input.txt", "w", encoding="utf-8") as input_file:
@@ -213,7 +210,7 @@ def make_python_file(day: str, instructions: str) -> None:
     # If we already made the file, just overwrite the instructions,
     # keep the code we already wrote.
     if os.path.exists(f"Day_{day}/day_{day}_problems.py"):
-        print(f"{YELLOW}{BOLD}python file exists, editing current file.{END}")
+        print(f"{YELLOW}{BOLD}python file exists, editing current file.{RESET}")
         with open(f"Day_{day}/day_{day}_problems.py", "r+", encoding="utf-8") as python_file:
             data = python_file.read()
             previous_contents = data.split('"""', 2)
@@ -224,9 +221,7 @@ def make_python_file(day: str, instructions: str) -> None:
     else:
         with open(f"Day_{day}/day_{day}_problems.py", "w", encoding="utf-8") as python_file:
             with open("py_template.txt", "r", encoding="utf-8") as template:
-                output = (
-                    template.read().replace("{day}", day).replace("{instructions}", instructions)
-                )  # noqa E501
+                output = (template.read().replace("{day}", day).replace("{instructions}", instructions))  # noqa E501
             python_file.write(output)
 
 
