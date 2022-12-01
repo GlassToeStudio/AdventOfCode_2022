@@ -89,6 +89,7 @@ those Elves carrying in total?
 
 
 from io import TextIOWrapper
+from math import inf
 
 
 def format_data(in_file: TextIOWrapper) -> list[list[str]]:
@@ -138,7 +139,7 @@ def find_highest_three_calorie_counts(dat: list[list[str]]) -> int:
     return sum(r[0:3])
 
 
-def sum_top_n_highest(dat: list[list[str]], n: int = 1) -> int:
+def sum_top_n_highest(dat: list[list[str]], n: int = inf) -> int:
     """Return sum of top n sums from input lists
 
     Args:
@@ -152,10 +153,10 @@ def sum_top_n_highest(dat: list[list[str]], n: int = 1) -> int:
     for d in dat:
         r.append(sum(int(x) for x in d))
     r.sort(reverse=True)
-    return sum(r[0:n])
+    return sum(r[0:min(n, len(r))])
 
 
 if __name__ == "__main__":
-    with open("Day_01/input.txt", "r", encoding="utf-8") as f:
+    with open("Day_01/sample.txt", "r", encoding="utf-8") as f:
         data = format_data(f)
-        print(f"Part 1: {sum_top_n_highest(data)}\nPart 2: {sum_top_n_highest(data, 3)}")
+        print(f"Part 1: {sum_top_n_highest(data, 1)}\nPart 2: {sum_top_n_highest(data, 3)}")
