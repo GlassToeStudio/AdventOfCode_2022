@@ -1,0 +1,25 @@
+"""
+{instructions}
+"""
+
+
+from io import TextIOWrapper
+
+
+def format_data(in_file: TextIOWrapper) -> list[str]:
+    """Return a list of str from the given text."
+
+    Args:
+        in_file (TextIOWrapper): text file
+
+    Returns:
+        list[str]: input data as list[str]
+    """
+
+    return [x.strip() for x in in_file.readlines()]
+
+
+if __name__ == "__main__":
+    with open("Day_{day}/sample.txt", 'r', encoding='utf-8') as f:
+        data = format_data(f)
+        print(data)
