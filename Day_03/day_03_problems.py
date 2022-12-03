@@ -114,61 +114,6 @@ is the sum of the priorities of those item types?
 
 from io import TextIOWrapper
 
-ALPHABET = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z"
-]
-
 
 def format_data(in_file: TextIOWrapper) -> list[str]:
     """Return a list of str from the given text."
@@ -187,8 +132,8 @@ def find_item(data):
     sum = 0
     for item in sacks:
         letter = ''.join(set(item[0]).intersection(item[1]))
-        index = ALPHABET.index(letter)+1
-        sum += index
+        ans = ord(letter) - 96 if ord(letter) - 96 >= 0 else ord(letter) - 38
+        sum += ans
     return sum
 
 
@@ -196,8 +141,7 @@ def find_badge(data):
     sum = 0
     for n in range(0, len(data), 3):
         letter = ''.join(set(data[n+2]).intersection(''.join(set(data[n]).intersection(data[n+1]))))
-        index = ALPHABET.index(letter)+1
-        sum += index
+        sum += ord(letter) - 96 if ord(letter) - 96 >= 0 else ord(letter) - 38
     return sum
 
 
