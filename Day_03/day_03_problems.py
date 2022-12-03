@@ -132,8 +132,7 @@ def find_item(data):
     sum = 0
     for item in sacks:
         letter = ''.join(set(item[0]).intersection(item[1]))
-        ans = ord(letter) - 96 if ord(letter) - 96 >= 0 else ord(letter) - 38
-        sum += ans
+        sum += ord(letter) - 96 if ord(letter) - 96 >= 0 else ord(letter) - 38
     return sum
 
 
