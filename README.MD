@@ -21,10 +21,52 @@ The Elves take turns writing down the number of Calories contained by the variou
 ```
 
 ### Part 1:
+
 Find the Elf carrying the most Calories. How many total Calories is that Elf carrying?
 
 ### Part 2:
+
 Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
+
+</p>
+</details>
+
+<details>
+<summary><b>Day 2: Rock Paper Scissors</b></summary>
+<p>
+Overall description
+
+```
+
+```
+
+### Part 1:
+
+Part 1 description
+
+### Part 2:
+
+Part 2 description
+
+</p>
+</details>
+
+<details>
+<summary><b>Day 3: Rucksack Reorganization</b></summary>
+<p>
+Overall description
+
+```
+
+```
+
+### Part 1:
+
+Part 1 description
+
+### Part 2:
+
+Part 2 description
 
 </p>
 </details>
