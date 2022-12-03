@@ -61,7 +61,7 @@ def get_input_data(url: str, session_id: str) -> list[str]:
     cookies = {
         "session": session_id,
     }
-    res = requests.get(f"{url}/input", cookies=cookies, verify=False)
+    res = requests.get(f"{url}/input", cookies=cookies)
     data = res.content.decode("UTF-8")
 
     return data
@@ -81,7 +81,7 @@ def get_instruction_data(url: str, session_id: str) -> str:
     cookies = {
         "session": session_id,
     }
-    res = requests.get(f"{url}", cookies=cookies, verify=False).text
+    res = requests.get(f"{url}", cookies=cookies).text
     html_text = BeautifulSoup(res, "html.parser").get_text()
 
     return html_text
