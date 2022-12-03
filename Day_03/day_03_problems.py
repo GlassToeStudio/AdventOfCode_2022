@@ -147,5 +147,4 @@ def find_badge(data):
 if __name__ == "__main__":
     with open("Day_03/input.txt", 'r', encoding='utf-8') as f:
         data = format_data(f)
-        print(find_item(data))
-        print(find_badge(data))
+        print(f"Part 1: {find_item(data)}\nPart 2: {find_badge(data)}")
