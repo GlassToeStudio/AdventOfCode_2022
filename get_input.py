@@ -7,7 +7,15 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from gts_colors.colors import BLUE, BOLD, RESET, YELLOW
+
+try:
+    from gts_colors.colors import BLUE, BOLD, RESET, YELLOW
+except ImportError:
+    __ESC__ = "\033["
+    BLUE = f"{__ESC__}34m"
+    BOLD = f"{__ESC__}1m"
+    RESET = f"{__ESC__}0m"
+    YELLOW = f"{__ESC__}33m"
 
 
 def get_args() -> argparse.Namespace:
