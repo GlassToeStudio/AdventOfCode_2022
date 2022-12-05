@@ -33,6 +33,7 @@ def get_args() -> argparse.Namespace:
     parser.add_argument("day", help="Enter the day for the problem you are working on.")  # noqa: E501
     parser.add_argument("-i", "--input", help="Create the input file.", action="store_true")  # noqa: E501
     parser.add_argument("-p", "--python", help="Create the python template.", action="store_true")  # noqa: E501
+    parser.add_argument("-r", "--readme", help="Create the read me template.", action="store_true")  # noqa: E501
     return parser.parse_args()
 
 
@@ -243,7 +244,7 @@ def main():
     args = get_args()
     aoc_url = f"https://adventofcode.com/2022/day/{args.day}"
     session_id = get_session_id()
-
+    title = None
     day = fix_day(args.day)
     try_make_dir(day)
 
@@ -254,6 +255,10 @@ def main():
         instruction_data = get_instruction_data(aoc_url, session_id)
         instructions, title = format_instruction_text(instruction_data)
         make_python_file(day, instructions)
+    if args.readme:
+        if title is None:
+            instruction_data = get_instruction_data(aoc_url, session_id)
+            instructions, title = format_instruction_text(instruction_data)
         update_readme(title)
 
 
