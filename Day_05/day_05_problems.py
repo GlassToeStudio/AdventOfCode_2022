@@ -78,10 +78,77 @@ After the rearrangement procedure completes, what crate ends up on top of each
 stack?
 
 
+Your puzzle answer was LBLVVTVLP.The first half of this puzzle is complete! It
+provides one gold star: *
+
+
+
+--- Part Two ---
+As you watch the crane operator expertly rearrange the crates, you notice the
+process isn't following your prediction.
+
+Some mud was covering the writing on the side of the crane, and you quickly
+wipe it away. The crane isn't a CrateMover 9000 - it's a CrateMover 9001.
+
+The CrateMover 9001 is notable for many new and exciting features: air
+conditioning, leather seats, an extra cup holder, and the ability to pick up
+and move multiple crates at once.
+
+Again considering the example above, the crates begin in the same
+configuration:
+
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+Moving a single crate from stack 2 to stack 1 behaves the same as before:
+[D]        
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+However, the action of moving three crates from stack 1 to stack 3 means that
+those three moved crates stay in the same order, resulting in this new
+configuration:
+
+        [D]
+        [N]
+    [C] [Z]
+    [M] [P]
+ 1   2   3
+
+Next, as both crates are moved from stack 2 to stack 1, they retain their order
+as well:
+
+        [D]
+        [N]
+[C]     [Z]
+[M]     [P]
+ 1   2   3
+
+Finally, a single crate is still moved from stack 1 to stack 2, but now it's
+crate C that gets moved:
+
+        [D]
+        [N]
+        [Z]
+[M] [C] [P]
+ 1   2   3
+
+In this example, the CrateMover 9001 has put the crates in a totally different
+order: MCD.
+
+Before the rearrangement process finishes, update your simulation so that the
+Elves know where they should stand to be ready to unload the final supplies.
+After the rearrangement procedure completes, what crate ends up on top of each
+stack?
+
 """
 
 
 from collections import deque
+from copy import deepcopy
 from io import TextIOWrapper
 
 
@@ -102,13 +169,13 @@ def format_data(in_file: TextIOWrapper) -> list[str]:
         if "1" in x:
             instructions = [
                 int(y.strip())
-                for z in temp[_ + 1 :]
+                for z in temp[_ + 1:]
                 for y in (z.replace("move ", "").replace(" from ", "-").replace(" to ", "-").split("-"))
                 if y != " "
             ]
-            instructions = [instructions[j : j + 3] for j in range(0, len(instructions) - 2, 3)]
+            instructions = [instructions[j: j + 3] for j in range(0, len(instructions) - 2, 3)]
             break
-        crates[_] = [x[i : i + 3] for i in range(0, len(x) - 3, 4)]
+        crates[_] = [x[i: i + 3] for i in range(0, len(x) - 3, 4)]
 
     crates = [deque(x[i] for x in reversed(crates[:-1])) for i in range(len(crates[0]))]
     for x in crates:
@@ -121,17 +188,34 @@ def format_data(in_file: TextIOWrapper) -> list[str]:
     return crates, instructions
 
 
-def move_crates(crates, instructions):
+def move_crates_9000(crates, instructions):
+    moved_crates = deepcopy(crates)
     for mov, fr, to in instructions:
         for i in range(mov):
-            crates[to - 1].append(crates[fr - 1].pop())
+            moved_crates[to - 1].append(moved_crates[fr - 1].pop())
+    return moved_crates
+
+
+def move_crates_9001(crates, instructions):
+    moved_crates = deepcopy(crates)
+    for mov, fr, to in instructions:
+        temp = list()
+        for i in range(mov):
+            temp.append(moved_crates[fr - 1].pop())
+        moved_crates[to - 1].extend(reversed(temp))
+    return moved_crates
+
+
+def calc_ans(crates):
+    ans = ""
+    for x in crates:
+        ans += x[-1].replace("[", "").replace("]", "")
+    return ans
 
 
 if __name__ == "__main__":
     with open("Day_05/input.txt", "r", encoding="utf-8") as f:
         crates, instructions = format_data(f)
-        move_crates(crates, instructions)
-        ans = ""
-        for x in crates:
-            ans += x.pop().replace("[", "").replace("]", "")
-        print(ans)
+        c_9000_stack = move_crates_9000(crates, instructions)
+        c_9001_stack = move_crates_9001(crates, instructions)
+        print(f"Part 1: {calc_ans(c_9000_stack)}\nPart 2: {calc_ans(c_9001_stack)}")
