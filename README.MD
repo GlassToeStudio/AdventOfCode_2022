@@ -90,3 +90,63 @@ Part 2 description
 
 </p>
 </details>
+
+<details>
+<summary><b>Day 5: Supply Stacks</b></summary>
+<p>
+Overall description
+
+```
+
+```
+
+### Part 1:
+
+Part 1 description
+
+### Part 2:
+
+Part 2 description
+
+</p>
+</details>
+
+<details>
+<summary><b>Day 6: Tuning Trouble</b></summary>
+<p>
+Overall description
+
+```
+
+```
+
+### Part 1:
+
+Part 1 description
+
+### Part 2:
+
+Part 2 description
+
+</p>
+</details>
+
+<details>
+<summary><b>Day 7: No Space Left On Device</b></summary>
+<p>
+Overall description
+
+```
+
+```
+
+### Part 1:
+
+Part 1 description
+
+### Part 2:
+
+Part 2 description
+
+</p>
+</details>
