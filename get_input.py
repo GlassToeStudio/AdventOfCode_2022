@@ -117,9 +117,9 @@ def format_instruction_text(html_text: str) -> str:
         # '--- message ---'
         # 'message'
         # [-]{3}[\s]{1} '--- '
-        # ([\s\w:!]*) 'any characters, whitespace, colon, exclamation'
+        # ([\s\w:!-]*) 'any characters, whitespace, colon, exclamation, hyphen'
         # [\s]{1}[-]{3} ' ---'
-        regex_str = r"([-]{3}[\s]{1}([\s\w:!]*)[\s]{1}[-]{3})"
+        regex_str = r"([-]{3}[\s]{1}([\s\w:!-]*)[\s]{1}[-]{3})"
         regex = re.compile(regex_str)
         matches = regex.findall(html_text)
         title = matches[0][1]
